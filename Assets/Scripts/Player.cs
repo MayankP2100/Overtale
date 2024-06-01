@@ -6,11 +6,13 @@ public class Player : MonoBehaviour
 {
     [SerializeField] private float speed = 2.0f;
     private Vector2 moveDir = Vector2.zero;
+    private const string IS_WALKING = "IsWalking";
+    private bool isWalking = false;
+    [SerializeField] private Animator animator;
 
     // Start is called before the first frame update
     void Start()
     {
-        
     }
 
     // Update is called once per frame
@@ -18,5 +20,16 @@ public class Player : MonoBehaviour
     {
         moveDir = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
         transform.Translate(moveDir * speed * Time.deltaTime);
+
+        isWalking = moveDir != Vector2.zero;
+
+        if (isWalking)
+        {
+            animator.SetBool(IS_WALKING, true);
+        }
+        else
+        {
+            animator.SetBool(IS_WALKING, false);
+        }
     }
 }
