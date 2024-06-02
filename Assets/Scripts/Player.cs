@@ -28,6 +28,11 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        HandleMovement();   
+    }
+
+    private void HandleMovement()
+    {
         moveDir = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxis("Vertical"));
         moveDir = moveDir.normalized;
         transform.position += new Vector3(moveDir.x, moveDir.y, 0) * speed * Time.deltaTime;
@@ -40,7 +45,7 @@ public class Player : MonoBehaviour
             {
                 isWalking = true;
             }
-            else if(speed == runSpeed)
+            else if (speed == runSpeed)
             {
                 isRunning = true;
             }
